@@ -5,20 +5,18 @@ import Input from "../../Input";
 import Button from "../../Button";
 import { InfoCard } from "./Card";
 
-export default function PersonalInformation() {
-    const [isFormVisible, setIsFormVisible] = useState(true);
+export default function PersonalInformation({
+    isFormVisible,
+    onContinue,
+}: {
+    isFormVisible: boolean;
+    onContinue: () => void;
+}) {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-
     const handleContinue = () => {
-        setIsFormVisible(false);
         setIsFormSubmitted(true);
-    };
-
-
-    const handleEditClick = () => {
-        setIsFormVisible(true);
-        setIsFormSubmitted(false);
+        onContinue();
     };
 
     return (
@@ -28,9 +26,7 @@ export default function PersonalInformation() {
                 title="Informações Pessoais"
                 description="Utilizaremos seu e-mail para: Identificar seu perfil, histórico de compra, notificação de pedidos e carrinho de compras."
                 isFormVisible={isFormVisible}
-                onEditClick={handleEditClick}
                 showEditButton={!isFormVisible && isFormSubmitted}
-
             />
             {isFormVisible && (
                 <form>
@@ -45,7 +41,6 @@ export default function PersonalInformation() {
                             iconPosition="right"
                             onClick={handleContinue}
                         />
-
                     </div>
                 </form>
             )}
