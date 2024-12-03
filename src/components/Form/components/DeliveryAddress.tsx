@@ -13,24 +13,14 @@ import {
     SelectTrigger,
 } from "../../Select";
 
-export default function DeliveryAddress() {
+export default function DeliveryAddress({
+    isFormVisible,
+    onContinue,
+}: {
+    isFormVisible: boolean;
+    onContinue: () => void;
+}) {
     const [cep, setCep] = useState("");
-    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const [isFormVisible, setIsFormVisible] = useState(true);
-
-    const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCep(e.target.value);
-    };
-
-    const handleContinue = () => {
-        setIsFormVisible(false);
-        setIsFormSubmitted(true);
-    };
-
-    const handleEditClick = () => {
-        setIsFormVisible(true);
-        setIsFormSubmitted(false);
-    };
 
     return (
         <div className="flex flex-col shadow-xl">
@@ -39,8 +29,6 @@ export default function DeliveryAddress() {
                 title="ENDEREÇO DE ENTREGA"
                 description="Para calcular o frete é necessário preencher todos os campos acima."
                 isFormVisible={isFormVisible}
-                onEditClick={handleEditClick}
-                showEditButton={isFormSubmitted}
             />
             {isFormVisible && (
                 <div className="bg-white flex flex-col border-t border-zinc-200 p-6 gap-4 rounded-b-lg">
@@ -50,7 +38,7 @@ export default function DeliveryAddress() {
                         type="cep"
                         placeholder="Ex.: 00000-000"
                         value={cep}
-                        onChange={handleCepChange}
+                        onChange={(e) => setCep(e.target.value)}
                         helpText="Preencha suas informações de entrega corretamente para continuar."
                     />
                     {cep && (
@@ -61,33 +49,17 @@ export default function DeliveryAddress() {
                                 <Input id="number" label="Número" placeholder="Digite o número" />
                                 <Input id="complement" label="Complemento" placeholder="Digite o complemento" />
                             </div>
-                            <div className="flex flex-row gap-2 justify-between">
-                                <Select>
-                                    <SelectTrigger labelText="Estado">Selecione um estado</SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            <SelectLabel>Minha Label</SelectLabel>
-                                            <SelectItem value="opcao1">Opção 1</SelectItem>
-                                            <SelectItem value="opcao2">Opção 2</SelectItem>
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                                <Select>
-                                    <SelectTrigger labelText="Cidade">Selecione uma cidade</SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            <SelectLabel>Minha Label</SelectLabel>
-                                            <SelectItem value="opcao1">Opção 1</SelectItem>
-                                            <SelectItem value="opcao2">Opção 2</SelectItem>
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            </div>
                         </>
                     )}
-                    <Button text="Continuar" icon={<MoveRight />} iconPosition="right" onClick={handleContinue} />
+                    <Button
+                        text="Continuar"
+                        icon={<MoveRight />}
+                        iconPosition="right"
+                        onClick={onContinue}
+                    />
                 </div>
             )}
         </div>
     );
 }
+
