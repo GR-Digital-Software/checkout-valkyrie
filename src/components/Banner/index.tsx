@@ -1,11 +1,15 @@
 import Image from "next/image";
 
-export default function Banner() {
+interface BannerProps {
+  banner: string;
+}
+
+export default function Banner({ banner }: BannerProps) {
   return (
     <>
       <div className="sm:hidden">
         <Image
-          src="/checkout/banner-mobile.svg"
+          src={banner}
           alt="Banner"
           layout="responsive"
           width={100}
@@ -14,9 +18,9 @@ export default function Banner() {
       </div>
       <div className="hidden sm:block">
         <Image
-          src="/checkout/banner-desktop.svg"
+          src={banner}
           alt="Banner"
-          layout="responsive"
+          className="w-full max-h-[400px] bg-cover"
           width={100}
           height={50}
         />

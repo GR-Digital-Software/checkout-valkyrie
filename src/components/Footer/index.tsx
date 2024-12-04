@@ -1,6 +1,24 @@
 import Divider from "../Divider";
 import Image from "next/image";
-export default function Footer() {
+interface FooterProps {
+  store: {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string | null;
+    name: string;
+    description: string;
+    document: string | null;
+    documentType: string | null;
+    logo: string | null;
+    address: string | null;
+    email: string;
+    phone: string;
+    paymentProcessorId: string | null;
+    userId: number;
+  };
+}
+export default function Footer({ store }: FooterProps) {
   return (
     <>
       <div className="flex flex-col w-full mb-4 px-6">
@@ -76,17 +94,17 @@ export default function Footer() {
         </div>
 
         <p className="flex uppercase w-full justify-center items-center text-sm font-normal text-zinc-700">
-          [NOME DA LOJA]  -  CNPJ: 00.000.000/0000-00
+          {store.name}  -  CNPJ: 00.000.000/0000-00
         </p>
         <div className="flex flex-col w-full justify-center items-center px-6">
           <p className="uppercase text-sm font-normal text-zinc-700">
             Av. Juscelino Almeida, 192
           </p>
           <p className="uppercase text-sm font-normal text-zinc-700">
-            contato@suporte.com
+            {store.email}
           </p>
           <p className="uppercase text-sm font-normal text-zinc-700">
-            Whatsapp: (00) 0000-0000
+            Whatsapp: {store.phone}
           </p>
           <div className="flex justify-center items-center gap-4 text-sm font-normal text-zinc-700">
             <p>Termos de Uso</p>
