@@ -22,7 +22,6 @@ const TemplatePage = async ({ params }: { params: { slug: string } }) => {
     }
 
     const data = await res.json();
-    console.log(data.salesPlan.planProducts[0]);
     return (
       <div className="flex flex-col w-full bg-zinc-200">
         <Header logo={data.checkoutTemplate.logoUrl} />
