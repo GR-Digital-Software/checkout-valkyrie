@@ -1,26 +1,30 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-export default function Banner() {
-    return (
-        <>
-            <div className="sm:hidden">
-                <Image
-                    src="/checkout/banner-mobile.svg"
-                    alt="Banner"
-                    layout="responsive"
-                    width={100}
-                    height={50}
-                />
-            </div>
-            <div className="hidden sm:block">
-                <Image
-                    src="/checkout/banner-desktop.svg"
-                    alt="Banner"
-                    layout="responsive"
-                    width={100}
-                    height={50}
-                />
-            </div>
-        </>
-    );
+interface BannerProps {
+  banner: string;
+}
+
+export default function Banner({ banner }: BannerProps) {
+  return (
+    <>
+      <div className="sm:hidden">
+        <Image
+          src={banner}
+          alt="Banner"
+          layout="responsive"
+          width={100}
+          height={50}
+        />
+      </div>
+      <div className="hidden sm:block">
+        <Image
+          src={banner}
+          alt="Banner"
+          className="w-full max-h-[400px] bg-cover"
+          width={100}
+          height={50}
+        />
+      </div>
+    </>
+  );
 }
