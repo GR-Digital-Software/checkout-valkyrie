@@ -75,14 +75,14 @@ export default function ProductCard({
             })`,
           }}
         >
-          <div className="flex justify-end items-center p-2">
+          {/* <div className="flex justify-end items-center p-2">
             <Button
               icon={<Trash2 size={14} color="#A1A1AA" />}
               variant="outline"
               className="w-7 h-7"
               onClick={handleTrashClick}
             />
-          </div>
+          </div> */}
           {/* <div className="flex-grow" />
           <div className="bg-black w-full py-2 px-2 rounded-lg">
             <p className="text-center text-white font-normal text-xs">
@@ -104,25 +104,22 @@ export default function ProductCard({
               minimumFractionDigits: 2,
             })}
           </p>
-          <div className="flex flex-row w-fit bg-white border border-zinc-300 rounded-lg">
-            <button
+          <div className="flex flex-row w-fit rounded-lg">
+            {/* <button
               className="w-7 h-7 text-zinc-400 flex items-center justify-center rounded-r-lg"
               onClick={handleIncrement}
             >
               +
-            </button>
-            <input
-              type="text"
-              className="w-7 h-7 text-zinc-950 font-medium text-center border-0 rounded-none"
-              value={amount}
-              readOnly
-            />
-            <button
+            </button> */}
+            <p className="w-7 h-7 text-zinc-950 font-medium text-center border-0 rounded-none">
+              {amount} ×
+            </p>
+            {/* <button
               className="w-7 h-7 text-zinc-400 flex items-center justify-center rounded-l-lg"
               onClick={handleDecrement}
             >
               -
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -139,12 +136,14 @@ export default function ProductCard({
               icon={<X size={16} />}
               variant="outline"
               className="w-10 h-10"
+              iconPosition="center"
               onClick={handleCancel}
             />
             <Button
               icon={<Trash2 size={16} />}
               variant="red"
               className="w-10 h-10"
+              iconPosition="center"
               onClick={handleConfirmDelete}
             />
           </div>
