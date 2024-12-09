@@ -2,9 +2,8 @@ import TemplatePage from "@/components/TemplatePage";
 
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
   try {
-    // Fetch data from the API route
     const res = await fetch(
-      `http://localhost:3003/api/template/${params.slug}`,
+      `${process.env.NEXT_URL}/api/template/${params.slug}`,
       {
         cache: "no-store",
       }

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       .map((item: any) => item.variant_id)
       .map((id: string) => `gid://shopify/ProductVariant/${id}`);
     const res = await fetch(
-      `${process.env.PUBLIC_API_URL}/checkouts/cart/shopify?externalIds=` +
+      `${process.env.NEXT_PUBLIC_API_URL}/checkouts/cart/shopify?externalIds=` +
         externalIds.join(",")
     );
     const data = await res.json();
