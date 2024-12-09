@@ -10,33 +10,36 @@ import SubHeader from "./SubHeader";
 export default function TemplatePage({ data }: { data: any }) {
   return (
     <div className="flex flex-col w-full bg-zinc-200">
-      <Header logo={data.checkoutTemplate.logoUrl} />
-      <div>
-        <SubHeader />
-        <HeaderLine />
-      </div>
-      {data.checkoutTemplate.bannerUrl && (
-        <Banner banner={data.checkoutTemplate.bannerUrl} />
-      )}
-      <div className="flex flex-col gap-8 mt-5">
-        <div className="flex flex-row">
-          <QueryProvider>
+      <QueryProvider>
+        <Header
+          logo={data.checkoutTemplate.logoUrl}
+          planProducts={data.salesPlan.planProducts}
+        />
+        <div>
+          <SubHeader />
+          <HeaderLine />
+        </div>
+        {data.checkoutTemplate.bannerUrl && (
+          <Banner banner={data.checkoutTemplate.bannerUrl} />
+        )}
+        <div className="flex flex-col gap-8 mt-5">
+          <div className="flex flex-row">
             <Form
               planProducts={data.salesPlan.planProducts}
               requiresShipping={data.salesPlan?.requireShipping ?? true}
               shippingOptions={
                 data.shippingOptions ?? data.salesPlan.shippingOptions
               }
-              storeId={data.store.id ?? data.checkoutTemplate.store.id}
+              storeId={data.store?.id ?? data.checkoutTemplate.store.id}
             />
             <div className="hidden sm:block">
               <OrderCartDesktop planProducts={data.salesPlan.planProducts} />
             </div>
-          </QueryProvider>
+          </div>
+          {/* <CarruselTestimonial /> */}
         </div>
-        {/* <CarruselTestimonial /> */}
-      </div>
-      <Footer store={data.store.id ?? data.checkoutTemplate.store} />
+        <Footer store={data.store?.id ?? data.checkoutTemplate.store} />
+      </QueryProvider>
     </div>
   );
 }

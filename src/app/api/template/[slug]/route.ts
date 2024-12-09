@@ -6,9 +6,9 @@ export async function GET(
 ) {
   try {
     const { slug } = params;
-
+    console.log(process.env);
     // Construct the API URL using the slug
-    const apiUrl = `${process.env.PUBLIC_API_URL}/checkouts/templates/${slug}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkouts/templates/${slug}`;
 
     // Make the API request
     const apiResponse = await fetch(apiUrl, {

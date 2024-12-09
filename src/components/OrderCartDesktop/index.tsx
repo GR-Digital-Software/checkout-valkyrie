@@ -19,13 +19,19 @@ export default function OrderCartDesktop({
   const [code, setCode] = useState("");
   const [price, setPrice] = useState(0);
   const [hasAppliedCoupon, setHasAppliedCoupon] = useState(false);
-  const [appliedCoupon, setAppliedCoupon] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    code: string;
+    discount: number;
+  }>({
+    code: "",
+    discount: 0,
+  });
   const { refetch, data } = useQuery({
     queryKey: ["coupon", code],
     queryFn: () => {
       setHasAppliedCoupon(false);
       return axios.get(
-        `${process.env.PUBLIC_API_URL}/coupons/validate?code=` + code
+        `${process.env.NEXT_PUBLIC_API_URL}/coupons/validate?code=` + code
       );
     },
     enabled: false,
@@ -33,8 +39,8 @@ export default function OrderCartDesktop({
   useEffect(() => {
     if (data && !hasAppliedCoupon) {
       const coupon = data.data;
-      if (coupon.code === appliedCoupon) return;
-      setAppliedCoupon(coupon.code);
+      if (coupon.code === appliedCoupon.code) return;
+      setAppliedCoupon(coupon);
       if (coupon.discountType === "percentage") {
         setPrice((prev) => prev - (prev * coupon.discount) / (100 * 100));
       } else {
@@ -93,7 +99,13 @@ export default function OrderCartDesktop({
               </div>
               <div className="flex flex-row justify-between w-full">
                 <p className="text-zinc-950 text-sm font-semibold">Desconto</p>
-                <p className="text-zinc-500 text-sm font-normal">R$ 0,00</p>
+                <p className="text-zinc-500 text-sm font-normal">
+                  R${" "}
+                  {(appliedCoupon.discount / 100).toLocaleString("pt-br", {
+                    currency: "BRL",
+                    minimumFractionDigits: 2,
+                  })}
+                </p>
               </div>
             </div>
             <div className="bg-[#22C55E33] rounded-md h-fit py-2 px-[10px] w-full">

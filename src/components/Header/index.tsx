@@ -4,10 +4,12 @@ import Button from "../Button";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import OrderCart from "../OrderCart";
+import { PlanProductsType } from "@/types/planProducts";
 interface HeaderProps {
   logo: string;
+  planProducts: PlanProductsType[];
 }
-export default function Header({ logo }: HeaderProps) {
+export default function Header({ logo, planProducts }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,7 +23,11 @@ export default function Header({ logo }: HeaderProps) {
         onClick={() => setIsOpen(true)}
       />
 
-      <OrderCart setIsOpen={setIsOpen} isOpen={isOpen} />
+      <OrderCart
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        planProducts={planProducts}
+      />
     </header>
   );
 }

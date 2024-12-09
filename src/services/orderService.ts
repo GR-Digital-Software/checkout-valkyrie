@@ -50,22 +50,35 @@ interface OrderData {
   couponCode?: string; // Optional property
 }
 
-// The function definition with the type:
+const BASE_URL_API = process.env.NEXT_PUBLIC_API_URL;
 export async function createOrder(
   orderData: OrderData,
   storeId: string
 ): Promise<any> {
   try {
-    const response = await axios.post(
-      `${process.env.PUBLIC_API_URL}/orders`,
-      orderData,
-      {
-        headers: {
-          "X-Store-Id": storeId,
-          "Content-Type": "application/json",
-        },
-      }
+    const response = await axios.post(`${BASE_URL_API}/orders`, orderData, {
+      headers: {
+        "X-Store-Id": storeId,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error creating order:",
+      (error as AxiosError).response?.data || (error as AxiosError).message
     );
+    throw error;
+  }
+}
+
+export async function getOrderInfo(orderId: string): Promise<any> {
+  try {
+    const response = await axios.get(`${BASE_URL_API}/orders/${orderId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(
