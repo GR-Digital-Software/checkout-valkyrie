@@ -53,21 +53,29 @@ export default function Form({
                     state: "CE",
                     street: formData.deliveryAddress!.address,
                     streetNumber: formData.deliveryAddress!.number,
-                    zipCode: formData.deliveryAddress!.cep,
+                    zipCode: formData.deliveryAddress!.cep.replace("-", ""),
                   },
                   cvv: data.cvv!,
                   expMonth: Number(data.expirationMonth!),
                   expYear: Number(data.expirationYear!),
-                  holderDocument: formData.personalInformation?.cpf!,
+                  holderDocument: formData.personalInformation?.cpf
+                    .replaceAll("-", "")
+                    .replaceAll(".", "")!,
                   holderName: data.cardName!,
                   number: data.cardNumber!,
                 }
               : undefined,
           customer: {
-            cpf: formData.personalInformation!.cpf,
+            cpf: formData
+              .personalInformation!.cpf.replaceAll("-", "")
+              .replaceAll(".", "")!,
             email: formData.personalInformation!.email,
             name: formData.personalInformation!.name,
-            phone: formData.personalInformation!.phone,
+            phone: formData
+              .personalInformation!.phone!.replaceAll("(", "")
+              .replaceAll(")", "")
+              .replaceAll("-", "")
+              .replaceAll(" ", ""),
           },
           installments: data.installments
             ? Number(data.installments)
@@ -85,7 +93,7 @@ export default function Form({
               state: "CE",
               street: formData.deliveryAddress!.address,
               streetNumber: formData.deliveryAddress!.number,
-              zipCode: formData.deliveryAddress!.cep,
+              zipCode: formData.deliveryAddress!.cep.replace("-", ""),
             },
           },
           value:

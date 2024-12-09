@@ -91,6 +91,7 @@ export default function PersonalInformation({
                   placeholder="Ex.: 000.000.000-00"
                   {...field}
                   error={errors.cpf?.message}
+                  maskType="cpf"
                 />
               )}
             />
@@ -104,6 +105,7 @@ export default function PersonalInformation({
                   placeholder="Ex.: (00) 00000-0000"
                   {...field}
                   error={errors.phone?.message}
+                  maskType="phone"
                 />
               )}
             />
