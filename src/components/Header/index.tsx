@@ -7,7 +7,7 @@ import OrderCart from "../OrderCart";
 import { PlanProductsType } from "@/types/planProducts";
 interface HeaderProps {
   logo: string;
-  planProducts: PlanProductsType[];
+  planProducts?: PlanProductsType[];
 }
 export default function Header({ logo, planProducts }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,12 +22,13 @@ export default function Header({ logo, planProducts }: HeaderProps) {
         iconPosition="center"
         onClick={() => setIsOpen(true)}
       />
-
-      <OrderCart
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-        planProducts={planProducts}
-      />
+      {planProducts && (
+        <OrderCart
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          planProducts={planProducts}
+        />
+      )}
     </header>
   );
 }

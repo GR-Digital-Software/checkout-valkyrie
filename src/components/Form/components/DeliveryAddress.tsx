@@ -87,13 +87,14 @@ export default function DeliveryAddress({
   });
   const { data, error, isFetching, refetch } = useQuery({
     queryKey: ["fetchAddress"],
-    queryFn: () => fetchAddress(cep),
+    queryFn: () => fetchAddress(cep.replace("-", "")),
     enabled: false,
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setValue("address", data.logradouro || "");
       setValue("bairro", data.bairro || "");
       setValue("city", data.localidade || "");
@@ -103,7 +104,7 @@ export default function DeliveryAddress({
   }, [data, setValue]);
 
   useEffect(() => {
-    if (cep.length === 8) {
+    if (cep.length === 9) {
       refetch(); // Buscar dados da API
       setValue("cep", cep);
     } else {
@@ -137,7 +138,8 @@ export default function DeliveryAddress({
               label="CEP"
               placeholder="Ex.: 00000-000"
               value={cep}
-              onChange={(e) => setCep(e.target.value.replace(/\D/g, ""))}
+              onChange={(e) => setCep(e.target.value)}
+              maskType="cep"
             />
             {isFetching && <p>Buscando endereço...</p>}
             {error && <p className="text-red-500">Erro ao buscar o CEP.</p>}
@@ -152,7 +154,6 @@ export default function DeliveryAddress({
                       label="Endereço"
                       placeholder="Digite seu endereço"
                       {...field}
-                      readOnly
                       error={errors.address?.message}
                     />
                   )}
@@ -166,7 +167,6 @@ export default function DeliveryAddress({
                       label="Bairro"
                       placeholder="Digite seu bairro"
                       {...field}
-                      readOnly
                       error={errors.bairro?.message}
                     />
                   )}
@@ -250,7 +250,6 @@ export default function DeliveryAddress({
                         label="Cidade"
                         placeholder="Digite a cidade"
                         {...field}
-                        readOnly
                         error={errors.city?.message}
                         className="w-full"
                       />

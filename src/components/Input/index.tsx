@@ -7,7 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   label?: string;
   helpText?: string;
-  maskType?: "none" | "cpf" | "phone" | "creditCard";
+  maskType?: "none" | "cpf" | "phone" | "creditCard" | "cep";
 }
 
 const Input: React.FC<InputProps> = ({
@@ -24,7 +24,6 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const [value, setValue] = useState("");
-
   // Função para aplicar a máscara com base no tipo
   const applyMask = (inputValue: string, maskType: string): string => {
     const numericValue = inputValue.replace(/\D/g, ""); // Remove tudo que não é número
@@ -42,6 +41,8 @@ const Input: React.FC<InputProps> = ({
           .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
       case "creditCard":
         return numericValue.slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ");
+      case "cep":
+        return numericValue.slice(0, 8).replace(/(\d{5})(\d{1,3})$/, "$1-$2");
       case "none":
       default:
         return inputValue;
@@ -50,6 +51,7 @@ const Input: React.FC<InputProps> = ({
 
   // Manipula a mudança no input e aplica a máscara
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     const maskedValue = applyMask(e.target.value, maskType);
     setValue(maskedValue);
     if (props.onChange) {
@@ -72,15 +74,15 @@ const Input: React.FC<InputProps> = ({
           </div>
         )}
         <input
+          {...props}
           type={type}
           id={id}
           placeholder={placeholder}
-          value={value}
-          onChange={handleChange}
           className={`w-full p-2 border border-zinc-200 placeholder:text-sm placeholder:font-normal placeholder:text-zinc-500 rounded-md ${
             iconLeft ? "pl-8" : ""
           } ${iconRight ? "pr-8" : ""}`}
-          {...props}
+          onChange={handleChange}
+          value={props.value ?? value}
         />
         {iconRight && (
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2">

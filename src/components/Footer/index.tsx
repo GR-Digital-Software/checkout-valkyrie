@@ -20,7 +20,7 @@ interface FooterProps {
 }
 export default function Footer({ store }: FooterProps) {
   return (
-    <>
+    <div className="bg-zinc-200">
       <div className="flex flex-col w-full mb-4 px-6">
         <Divider className="w-full h-3" />
         <div className="flex flex-col items-center">
@@ -116,6 +116,6 @@ export default function Footer({ store }: FooterProps) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
