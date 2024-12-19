@@ -3,7 +3,6 @@ import { URL } from "url";
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse the request body
     const body = await request.formData();
     var object: { [key: string]: any } = {};
     body.forEach((value, key) => (object[key] = value));
@@ -26,10 +25,12 @@ export async function POST(request: NextRequest) {
         return { ...plan.planProducts[0], amount };
       }),
     };
-
-    const response = NextResponse.redirect(new URL("/checkout", request.url), {
-      status: 303,
-    });
+    const response = NextResponse.redirect(
+      new URL(process.env.NEXT_URL + "/checkout", request.url),
+      {
+        status: 303,
+      }
+    );
 
     response.cookies.set("checkoutTemplate", JSON.stringify(data.template), {
       path: "/",
