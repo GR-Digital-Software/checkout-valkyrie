@@ -120,6 +120,7 @@ export default function DeliveryAddress({
     setIsFormSubmitted(true);
     onContinue(data);
   };
+  console.log(errors);
   return (
     <div className="flex flex-col shadow-xl">
       <InfoCard

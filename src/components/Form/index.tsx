@@ -23,6 +23,7 @@ export default function Form({
   requiresShipping: boolean;
 }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState<
     "personal" | "delivery" | "payment"
   >("personal");
@@ -35,6 +36,7 @@ export default function Form({
   };
 
   async function handleSubmit(data: PaymentFormData) {
+    setLoading(true);
     try {
       const orderId = await createOrder(
         {
@@ -115,10 +117,12 @@ export default function Form({
       router.push("/payment");
     } catch (e) {
       return "error";
+    } finally {
+      setLoading(false);
     }
   }
   return (
-    <div className="flex flex-col w-full h-fit px-6 gap-8">
+    <div className="flex flex-col w-full h-fit px-6 md:px-0 md:pl-28 gap-8">
       <PersonalInformation
         isFormVisible={currentStep === "personal"}
         setCurrentStep={setCurrentStep}
@@ -139,6 +143,7 @@ export default function Form({
         />
       )}
       <PaymentMethod
+        loading={loading}
         isFormVisible={currentStep === "payment"}
         onContinue={handleSubmit}
       />

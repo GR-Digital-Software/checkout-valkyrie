@@ -38,8 +38,10 @@ export type PaymentFormData = z.infer<typeof paymentSchema>;
 export default function PaymentMethod({
   isFormVisible,
   onContinue,
+  loading,
 }: {
   isFormVisible: boolean;
+  loading: boolean;
   onContinue: (data: any) => void;
 }) {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -400,10 +402,11 @@ export default function PaymentMethod({
             </RadioGroup>
             <div className="mt-3 w-full">
               <Button
-                text="PAGAR - 12x R$ 289,90"
+                text="PAGAR"
                 type="submit"
                 variant="green"
                 className="w-full"
+                loading={loading}
               />
             </div>
           </form>
