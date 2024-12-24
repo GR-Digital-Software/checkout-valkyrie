@@ -1,7 +1,27 @@
-export default function SubHeader() {
-    return (
-        <div className="flex w-full bg-black justify-center items-center">
-            <p className="text-sm font-normal text-white px-[45px] py-[22px]">ESQUENTA BLACK FRIDAY - ATÉ 50% OFF!</p>
-        </div>
-    )
+export default function SubHeader({
+  message,
+  background: backgroundColor,
+  color,
+}: {
+  message: string;
+  background: string;
+  color: string;
+}) {
+  return (
+    <div
+      className="flex w-full justify-center items-center"
+      style={{
+        backgroundColor,
+      }}
+    >
+      <p
+        className="text-sm font-normal px-[45px] py-[22px]"
+        style={{
+          color,
+        }}
+      >
+        {message}
+      </p>
+    </div>
+  );
 }

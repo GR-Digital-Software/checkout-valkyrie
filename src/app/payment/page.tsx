@@ -25,8 +25,8 @@ export default async function Payment() {
   return (
     <div className="flex flex-col gap-4 bg-zinc-200 flex-[1] h-screen">
       <Header logo={checkoutTemplate.logoUrl} />
-      <div className="px-28">
-        <div className="border-b-zinc-300 border-b w-full px-28 pb-11">
+      <div className="px-6 md:px-28">
+        <div className="border-b-zinc-300 border-b w-full px-6 md:px-28 pb-11">
           <div className="flex flex-col w-full max-w-[500px] mx-auto gap-4 border-b ">
             <PaymentCard />
             <div className="flex flex-col gap-4 text-center items-center jutify-center text-2xl">

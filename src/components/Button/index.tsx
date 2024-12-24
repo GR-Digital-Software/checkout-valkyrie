@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "../Spinner";
 
 interface ButtonProps {
   text?: string;
@@ -10,6 +11,7 @@ interface ButtonProps {
   disabled?: boolean;
   wFull?: boolean;
   type?: "submit" | "button";
+  loading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   wFull = false,
   type = "button",
+  loading,
 }) => {
   const baseClasses =
     "px-4 py-3 flex items-center justify-center rounded-md uppercase";
@@ -57,12 +60,18 @@ const Button: React.FC<ButtonProps> = ({
       className={`${baseClasses} ${variantClasses} ${className} ${
         disabled ? disabledClasses : ""
       } ${wFull ? "w-full" : ""}`}
-      disabled={disabled}
+      disabled={disabled || loading}
     >
-      {iconPosition === "left" && renderIcon()}
-      {text && <span>{text}</span>}
-      {iconPosition === "right" && renderIcon()}
-      {iconPosition === "center" && renderIcon()}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {iconPosition === "left" && renderIcon()}
+          {text && <span>{text}</span>}
+          {iconPosition === "right" && renderIcon()}
+          {iconPosition === "center" && renderIcon()}
+        </>
+      )}
     </button>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import Banner from "./Banner";
 import Footer from "./Footer";
 import Form from "./Form";
@@ -8,29 +9,45 @@ import QueryProvider from "./QueryProvider";
 import SubHeader from "./SubHeader";
 
 export default function TemplatePage({ data }: { data: any }) {
+  const { checkoutTemplate } = data;
   return (
-    <div className="flex flex-col w-full bg-zinc-200">
+    <div
+      className="flex flex-col w-full"
+      style={{
+        backgroundColor: checkoutTemplate.backgroundColor,
+      }}
+    >
       <QueryProvider>
         <Header
-          logo={data.checkoutTemplate.logoUrl}
+          logoAlignment={checkoutTemplate.logoAlignment}
+          logo={checkoutTemplate.logoUrl}
           planProducts={data.salesPlan.planProducts}
         />
         <div>
-          <SubHeader />
-          <HeaderLine />
+          <SubHeader
+            background={checkoutTemplate.accentBackgroundColor}
+            color={checkoutTemplate.accentForegroundColor}
+            message={checkoutTemplate.topPromoMessage}
+          />
+          <HeaderLine colors={checkoutTemplate.gradientBarColors} />
         </div>
-        {data.checkoutTemplate.bannerUrl && (
-          <Banner banner={data.checkoutTemplate.bannerUrl} />
+        {checkoutTemplate.primaryBannerUrl && (
+          <Banner
+            banner={checkoutTemplate.primaryBannerUrl}
+            secondaryBanner={checkoutTemplate.secondaryBannerUrl}
+            videoUrl={checkoutTemplate.videoUrl}
+            backgroundColor={checkoutTemplate.backgroundColor}
+          />
         )}
-        <div className="flex flex-col gap-8 mt-5">
-          <div className="flex flex-row">
+        <div className="flex flex-col gap-8 -top-20 mt-5">
+          <div className="flex flex-row gap-8">
             <Form
               planProducts={data.salesPlan.planProducts}
-              requiresShipping={data.salesPlan?.requireShipping ?? true}
+              requiresShipping={!checkoutTemplate.disableAddress}
               shippingOptions={
                 data.shippingOptions ?? data.salesPlan.shippingOptions
               }
-              storeId={data.store?.id ?? data.checkoutTemplate.store.id}
+              storeId={data.store?.id ?? checkoutTemplate.storeId}
             />
             <div className="hidden sm:block">
               <OrderCartDesktop planProducts={data.salesPlan.planProducts} />
@@ -38,7 +55,49 @@ export default function TemplatePage({ data }: { data: any }) {
           </div>
           {/* <CarruselTestimonial /> */}
         </div>
-        <Footer store={data.store?.id ?? data.checkoutTemplate.store} />
+        <Footer
+          backgroundColor={checkoutTemplate.footerBackgroundColor}
+          color={checkoutTemplate.footerForegroundColor}
+          address={
+            checkoutTemplate.showStoreAddress
+              ? checkoutTemplate.storeAddress
+              : undefined
+          }
+          phone={
+            checkoutTemplate.showStoreWhatsappNumber
+              ? checkoutTemplate.storeWhatsappNumber
+              : undefined
+          }
+          document={
+            checkoutTemplate.showStoreTaxId
+              ? checkoutTemplate.storeTaxId
+              : undefined
+          }
+          email={
+            checkoutTemplate.showStoreEmail
+              ? checkoutTemplate.storeMail
+              : undefined
+          }
+          name={
+            checkoutTemplate.showStoreName ? data.store?.name ?? "" : undefined
+          }
+          privacyPolicy={
+            checkoutTemplate.showStorePrivacyPolicyUrl
+              ? checkoutTemplate.storePrivacyPolicyUrl
+              : undefined
+          }
+          showPayment={checkoutTemplate.showSupportedPaymentMethods}
+          termsOfUse={
+            checkoutTemplate.showStorePrivacyPolicyUrl
+              ? checkoutTemplate.storePrivacyPolicyUrl
+              : undefined
+          }
+          tradesAndReturns={
+            checkoutTemplate.showStoreReturnAndRefundPolicyUrl
+              ? checkoutTemplate.storeReturnAndRefundPolicyUrl
+              : undefined
+          }
+        />
       </QueryProvider>
     </div>
   );

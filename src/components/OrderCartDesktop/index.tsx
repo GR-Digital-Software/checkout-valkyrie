@@ -49,7 +49,7 @@ export default function OrderCartDesktop({
     }
   }, [data, hasAppliedCoupon, appliedCoupon]);
   return (
-    <div className="flex flex-col gap-6 px-6">
+    <div className="flex flex-col gap-6 px-6 md:px-0 md:pr-28">
       <div className="flex flex-col flex-[1] bg-white shadow-xl gap-6 w-96 rounded-b-md">
         <div className="bg-black h-2"></div>
         <div className="w-full flex flex-col px-6 gap-2 h-fit">
