@@ -45,7 +45,7 @@ export default function Banner({
         >
           <iframe
             className="aspect-video w-full h-full"
-            src="https://www.youtube.com/embed/NgiF0ZV2ZWc"
+            src={videoUrl}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>

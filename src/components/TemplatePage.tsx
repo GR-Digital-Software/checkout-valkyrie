@@ -9,7 +9,6 @@ import QueryProvider from "./QueryProvider";
 import SubHeader from "./SubHeader";
 
 export default function TemplatePage({ data }: { data: any }) {
-  console.log(data);
   const { checkoutTemplate } = data;
   return (
     <div
@@ -44,7 +43,7 @@ export default function TemplatePage({ data }: { data: any }) {
           <div className="flex flex-row gap-8">
             <Form
               planProducts={data.salesPlan.planProducts}
-              requiresShipping={data.salesPlan?.requireShipping ?? true}
+              requiresShipping={!checkoutTemplate.disableAddress}
               shippingOptions={
                 data.shippingOptions ?? data.salesPlan.shippingOptions
               }
