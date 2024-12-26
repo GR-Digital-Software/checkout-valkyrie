@@ -34,7 +34,7 @@ export default function HeaderLine({ colors }: { colors: string[] }) {
       ref={headerLineRef}
       className="flex w-full justify-center items-center h-1"
       style={{
-        background: `linear-gradient(90deg, ${colors[0]} 25%, ${colors[1]} 50%, ${colors[2]} 75%, ${colors[3]} 100%)`,
+        background: `linear-gradient(90deg, ${colors?.[0]} 25%, ${colors?.[1]} 50%, ${colors?.[2]} 75%, ${colors?.[3]} 100%)`,
         backgroundSize: "200% 200%",
         animation: "gradientAnimation 5s ease infinite",
       }}
