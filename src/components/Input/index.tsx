@@ -51,7 +51,6 @@ const Input: React.FC<InputProps> = ({
 
   // Manipula a mudança no input e aplica a máscara
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     const maskedValue = applyMask(e.target.value, maskType);
     setValue(maskedValue);
     if (props.onChange) {

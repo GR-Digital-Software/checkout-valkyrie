@@ -133,6 +133,8 @@ export default function Form({
       />
       {requiresShipping && (
         <DeliveryAddress
+          storeId={storeId}
+          products={planProducts}
           shippingOptions={shippingOptions}
           setCurrentStep={setCurrentStep}
           isFormVisible={currentStep === "delivery"}
