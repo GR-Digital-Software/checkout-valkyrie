@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Banner from "./Banner";
 import Footer from "./Footer";
 import Form from "./Form";
@@ -10,6 +11,13 @@ import SubHeader from "./SubHeader";
 
 export default function TemplatePage({ data }: { data: any }) {
   const { checkoutTemplate } = data;
+  useEffect(() => {
+    sessionStorage.setItem("store", JSON.stringify(data.store));
+    sessionStorage.setItem(
+      "checkoutTemplate",
+      JSON.stringify(data.checkoutTemplate)
+    );
+  }, [data]);
   return (
     <div
       className="flex flex-col w-full"

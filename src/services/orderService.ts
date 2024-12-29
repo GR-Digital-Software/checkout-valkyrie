@@ -41,7 +41,7 @@ interface Item {
 
 interface OrderData {
   customer: Customer;
-  shipping: Shipping;
+  shipping?: Shipping;
   paymentMethod: "credit_card" | "pix" | "boleto"; // Example of more payment methods
   card?: Card;
   installments?: number;

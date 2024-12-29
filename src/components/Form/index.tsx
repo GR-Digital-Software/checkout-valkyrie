@@ -82,22 +82,24 @@ export default function Form({
           installments: data.installments
             ? Number(data.installments)
             : undefined,
-          shipping: {
-            fee: Number(formData.deliveryAddress!.shippingOptionValue),
-            address: {
-              city: formData.deliveryAddress!.city,
-              complement:
-                formData.deliveryAddress!.complement !== ""
-                  ? formData.deliveryAddress!.complement
-                  : undefined,
-              country: "BR",
-              district: formData.deliveryAddress!.bairro,
-              state: "CE",
-              street: formData.deliveryAddress!.address,
-              streetNumber: formData.deliveryAddress!.number,
-              zipCode: formData.deliveryAddress!.cep.replace("-", ""),
-            },
-          },
+          shipping: formData.deliveryAddress
+            ? {
+                fee: Number(formData.deliveryAddress!.shippingOptionValue),
+                address: {
+                  city: formData.deliveryAddress!.city,
+                  complement:
+                    formData.deliveryAddress!.complement !== ""
+                      ? formData.deliveryAddress!.complement
+                      : undefined,
+                  country: "BR",
+                  district: formData.deliveryAddress!.bairro,
+                  state: "CE",
+                  street: formData.deliveryAddress!.address,
+                  streetNumber: formData.deliveryAddress!.number,
+                  zipCode: formData.deliveryAddress!.cep.replace("-", ""),
+                },
+              }
+            : undefined,
           value:
             planProducts.reduce(
               (total, product) => total + product.unitPrice,
