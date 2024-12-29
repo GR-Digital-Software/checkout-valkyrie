@@ -14,7 +14,7 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
     }
 
     const data = await res.json();
-    return <TemplatePage data={data} />;
+    return <TemplatePage data={{ ...data }} />;
   } catch (error: any) {
     return <div>Error: {error.message || "An unexpected error occurred."}</div>;
   }

@@ -21,6 +21,12 @@ export type PlanProductsType = {
     status: "active" | "inactive";
     storeId: number;
     externalId: string;
+    physicalProduct?: {
+      weight: number;
+      height: number;
+      width: number;
+      length: number;
+    };
     physicalProductId: number | null;
     digitalProductId: number | null;
     raffleProductId: number | null;

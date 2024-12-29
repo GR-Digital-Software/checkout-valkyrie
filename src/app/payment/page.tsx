@@ -1,6 +1,4 @@
-import Button from "@/components/Button";
 import Header from "@/components/Header";
-import { Separator } from "@radix-ui/react-select";
 import { cookies } from "next/headers";
 import PaymentCard from "./components/paymentCard";
 import Footer from "@/components/Footer";
@@ -24,7 +22,10 @@ export default async function Payment() {
   const shippingOptions = JSON.parse(shippingOptionsString);
   return (
     <div className="flex flex-col gap-4 bg-zinc-200 flex-[1] h-screen">
-      <Header logo={checkoutTemplate.logoUrl} />
+      <Header
+        logo={checkoutTemplate.logoUrl}
+        logoAlignment={checkoutTemplate.logoAlignment}
+      />
       <div className="px-6 md:px-28">
         <div className="border-b-zinc-300 border-b w-full px-6 md:px-28 pb-11">
           <div className="flex flex-col w-full max-w-[500px] mx-auto gap-4 border-b ">
@@ -39,7 +40,47 @@ export default async function Payment() {
           </div>
         </div>
       </div>
-      <Footer store={store} />
+      <Footer
+        backgroundColor={checkoutTemplate.footerBackgroundColor}
+        color={checkoutTemplate.footerForegroundColor}
+        address={
+          checkoutTemplate.showStoreAddress
+            ? checkoutTemplate.storeAddress
+            : undefined
+        }
+        phone={
+          checkoutTemplate.showStoreWhatsappNumber
+            ? checkoutTemplate.storeWhatsappNumber
+            : undefined
+        }
+        document={
+          checkoutTemplate.showStoreTaxId
+            ? checkoutTemplate.storeTaxId
+            : undefined
+        }
+        email={
+          checkoutTemplate.showStoreEmail
+            ? checkoutTemplate.storeMail
+            : undefined
+        }
+        name={checkoutTemplate.showStoreName ? store?.name ?? "" : undefined}
+        privacyPolicy={
+          checkoutTemplate.showStorePrivacyPolicyUrl
+            ? checkoutTemplate.storePrivacyPolicyUrl
+            : undefined
+        }
+        showPayment={checkoutTemplate.showSupportedPaymentMethods}
+        termsOfUse={
+          checkoutTemplate.showStorePrivacyPolicyUrl
+            ? checkoutTemplate.storePrivacyPolicyUrl
+            : undefined
+        }
+        tradesAndReturns={
+          checkoutTemplate.showStoreReturnAndRefundPolicyUrl
+            ? checkoutTemplate.storeReturnAndRefundPolicyUrl
+            : undefined
+        }
+      />
     </div>
   );
 }
