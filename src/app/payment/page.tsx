@@ -16,10 +16,10 @@ export default async function Payment() {
     !storeString
   )
     return null;
-  const checkoutTemplate = JSON.parse(checkoutTemplateString);
-  const store = JSON.parse(storeString);
-  const salesPlan = JSON.parse(salesPlanString);
-  const shippingOptions = JSON.parse(shippingOptionsString);
+  const checkoutTemplate = JSON.parse(
+    checkoutTemplateString ?? sessionStorage.getItem("checkoutTemplate")
+  );
+  const store = JSON.parse(storeString ?? sessionStorage.getItem("store"));
   return (
     <div className="flex flex-col gap-4 bg-zinc-200 flex-[1] h-screen">
       <Header
