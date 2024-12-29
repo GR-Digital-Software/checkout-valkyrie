@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 interface HeaderProps {
   logo: string;
   planProducts?: PlanProductsType[];
-  logoAlignment: "left" | "middle" | "right";
+  logoAlignment: "left" | "center" | "right";
 }
 
 const ALIGNMENT_DIC = {
   left: "md:justify-start",
-  middle: "md:justify-center",
+  center: "md:justify-center",
   right: "md:justify-end",
 };
 export default function Header({
